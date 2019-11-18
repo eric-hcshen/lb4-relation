@@ -17,20 +17,20 @@ import {
   del,
   requestBody,
 } from '@loopback/rest';
-import {Master} from '../models';
-import {MasterRepository} from '../repositories';
+import { Master } from '../models';
+import { MasterRepository } from '../repositories';
 
 export class MasterController {
   constructor(
     @repository(MasterRepository)
-    public masterRepository : MasterRepository,
-  ) {}
+    public masterRepository: MasterRepository,
+  ) { }
 
   @post('/masters', {
     responses: {
       '200': {
         description: 'Master model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Master)}},
+        content: { 'application/json': { schema: getModelSchemaRef(Master) } },
       },
     },
   })
@@ -54,7 +54,7 @@ export class MasterController {
     responses: {
       '200': {
         description: 'Master model count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -70,7 +70,7 @@ export class MasterController {
         description: 'Array of Master model instances',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Master)},
+            schema: { type: 'array', items: getModelSchemaRef(Master) },
           },
         },
       },
@@ -86,7 +86,7 @@ export class MasterController {
     responses: {
       '200': {
         description: 'Master PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -94,7 +94,7 @@ export class MasterController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Master, {partial: true}),
+          schema: getModelSchemaRef(Master, { partial: true }),
         },
       },
     })
@@ -108,7 +108,7 @@ export class MasterController {
     responses: {
       '200': {
         description: 'Master model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Master)}},
+        content: { 'application/json': { schema: getModelSchemaRef(Master) } },
       },
     },
   })
@@ -128,7 +128,7 @@ export class MasterController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Master, {partial: true}),
+          schema: getModelSchemaRef(Master, { partial: true }),
         },
       },
     })

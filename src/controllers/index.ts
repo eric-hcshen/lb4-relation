@@ -6,3 +6,6 @@ export * from './detail-master.controller';
 export * from './detail-master.controller';
 export * from './hello.controller';
 export * from './message.controller';
+export * from './detail-summary.controller';
+export * from './summary-detail.controller'
+export * from './summary.controller';

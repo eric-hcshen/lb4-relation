@@ -1,8 +1,9 @@
 import { Entity, model, property, belongsTo } from '@loopback/repository';
 import { Master } from './master.model';
 import { v4 as uuid } from 'uuid';
+import { Summary } from './summary.model';
 
-@model({ settings: { strict: false } })
+@model({settings: {strict: false}})
 export class Detail extends Entity {
   @property({
     type: 'string',
@@ -18,6 +19,9 @@ export class Detail extends Entity {
 
   @belongsTo(() => Master)
   masterId: string;
+
+  @belongsTo(() => Summary)
+  summaryId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

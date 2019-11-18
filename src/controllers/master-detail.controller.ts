@@ -19,8 +19,8 @@ import {
   Master,
   Detail,
 } from '../models';
-import {MasterRepository} from '../repositories';
-
+import { MasterRepository } from '../repositories';
+class All { master: Master; details: Detail[] };
 export class MasterDetailController {
   constructor(
     @repository(MasterRepository) protected masterRepository: MasterRepository,
@@ -32,7 +32,7 @@ export class MasterDetailController {
         description: 'Array of Detail\'s belonging to Master',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Detail)},
+            schema: { type: 'array', items: getModelSchemaRef(Detail) },
           },
         },
       },
@@ -45,11 +45,33 @@ export class MasterDetailController {
     return this.masterRepository.details(id).find(filter);
   }
 
+  @get('/all/{id}', {
+    responses: {
+      '200': {
+        description: 'Array of Detail\'s belonging to Master',
+        content: {
+          'application/json': {
+            schema: { type: 'array', items: getModelSchemaRef(Detail) },
+          },
+        },
+      },
+    },
+  })
+  async all(
+    @param.path.string('id') id: string,
+    @param.query.object('filter') filter?: Filter<Detail>,
+  ): Promise<All> {
+    let al = new All();
+    al.master = await this.masterRepository.findById(id);
+    al.details = await this.masterRepository.details(id).find(filter);
+    return al;
+  }
+
   @post('/masters/{id}/details', {
     responses: {
       '200': {
         description: 'Master model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Detail)}},
+        content: { 'application/json': { schema: getModelSchemaRef(Detail) } },
       },
     },
   })
@@ -74,7 +96,7 @@ export class MasterDetailController {
     responses: {
       '200': {
         description: 'Master.Detail PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -83,7 +105,7 @@ export class MasterDetailController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Detail, {partial: true}),
+          schema: getModelSchemaRef(Detail, { partial: true }),
         },
       },
     })
@@ -97,7 +119,7 @@ export class MasterDetailController {
     responses: {
       '200': {
         description: 'Master.Detail DELETE success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
