@@ -9,3 +9,4 @@ export * from './message.controller';
 export * from './detail-summary.controller';
 export * from './summary-detail.controller'
 export * from './summary.controller';
+export * from './label.controller';
